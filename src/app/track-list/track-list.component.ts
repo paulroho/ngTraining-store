@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { getSampleTracks } from '../data';
+import { Component } from '@angular/core';
+import { Store } from 'src/redux/store';
+import { Track } from '../track';
 
 @Component({
   selector: 'app-track-list',
   template: `
     <h2>Tracks</h2>
     <div class="track-list">
-      <div class="item" *ngFor="let track of playList">
+      <div class="item" *ngFor="let track of (playList$ | async)">
         <b>{{ track.title }}</b>
         <span>{{ track.artist }}</span>
         <button (click)="removeTrack(track)">remove</button>
@@ -16,10 +17,11 @@ import { getSampleTracks } from '../data';
   styles: []
 })
 export class TrackListComponent {
-  public playList = getSampleTracks();
+  public playList$ = this.store.select<Track[]>('playList');
 
+  constructor(private store: Store) {}
 
   public removeTrack(track: Track) {
-    console.log('track could not be added');
+    this.store.dispatch('removeTrack', track);
   }
 }

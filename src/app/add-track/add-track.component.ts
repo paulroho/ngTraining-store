@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from 'src/redux/store';
 
 @Component({
   selector: 'app-add-track',
@@ -17,7 +18,8 @@ export class AddTrackComponent {
   public artist: string;
   public title: string;
 
+  constructor(private store: Store) {}
   public addTrack() {
-    console.log('track could not be added');
+    this.store.dispatch('addTrack', { id: null, artist: this.artist, title: this.title });
   }
 }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TrackHttpClient } from './html-client';
+import { Store } from 'src/redux/store';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +11,12 @@ import { Component } from '@angular/core';
     <app-add-track></app-add-track>
   `
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  constructor(private trackHttpClient: TrackHttpClient, private store: Store) {}
+
+  public ngOnInit() {
+    this.trackHttpClient.fetchTracks().subscribe(tracks => {
+      tracks.forEach(track => this.store.dispatch('addTrack', track));
+    });
+  }
+}
