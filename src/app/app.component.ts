@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Track } from './track';
-import { TrackHttpClient } from './html-client';
+import { TrackHttpClient } from './http-client';
 import { AddTrack, AddTracks, LoadTracks } from './redux/playlist.actions';
 
 @Component({
