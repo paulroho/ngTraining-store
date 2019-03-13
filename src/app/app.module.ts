@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { AddTrackComponent } from './add-track/add-track.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
 import { TrackListComponent } from './track-list/track-list.component';
-import { TrackHttpClient } from './html-client';
+import { TrackHttpClient } from './http-client';
 
 @NgModule({
   declarations: [AppComponent, TrackListComponent, ArtistListComponent, AddTrackComponent],
