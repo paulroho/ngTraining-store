@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { getSampleTracks } from '../data';
+import { Track } from '../track';
 
 @Component({
   selector: 'app-track-list',
