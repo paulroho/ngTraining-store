@@ -1,3 +1,5 @@
+import { Track } from './track';
+
 export const getSampleTracks: () => Track[] = () => [
   {
     id: 1,
