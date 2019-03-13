@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Track } from './track';
+import { TrackHttpClient } from './html-client';
+import { AddTrack, AddTracks, LoadTracks } from './redux/playlist.actions';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +13,13 @@ import { Component } from '@angular/core';
     <app-add-track></app-add-track>
   `
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  constructor(private store: Store<{ playList: Track[] }>, private client: TrackHttpClient) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(new LoadTracks());
+    this.client.fetchTracks().subscribe(tracks => {
+      tracks.forEach(t => this.store.dispatch(new AddTrack(t)));
+    });
+  }
+}
