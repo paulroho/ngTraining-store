@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from 'src/redux/store';
+import { AddTrackAction } from 'src/redux/actions';
 
 @Component({
   selector: 'app-add-track',
@@ -20,6 +21,10 @@ export class AddTrackComponent {
 
   constructor(private store: Store) {}
   public addTrack() {
-    this.store.dispatch('addTrack', { id: null, artist: this.artist, title: this.title });
+    this.store.dispatch(
+      new AddTrackAction({
+        track: { id: null, artist: this.artist, title: this.title }
+      })
+    );
   }
 }

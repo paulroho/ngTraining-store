@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from 'src/redux/store';
 import { Track } from '../track';
+import { RemoveTrackAction } from 'src/redux/actions';
 
 @Component({
   selector: 'app-track-list',
@@ -22,6 +23,6 @@ export class TrackListComponent {
   constructor(private store: Store) {}
 
   public removeTrack(track: Track) {
-    this.store.dispatch('removeTrack', track);
+    this.store.dispatch(new RemoveTrackAction({ id: track.id }));
   }
 }

@@ -1,6 +1,7 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, pluck } from 'rxjs/operators';
 import { Track } from 'src/app/track';
+import { Actions } from './actions';
 
 export interface State {
   playList: Track[];
@@ -18,26 +19,36 @@ export class Store {
     return this.subject.value;
   }
 
-  public dispatch(action: 'addTrack' | 'removeTrack', track: Track): void {
-    switch (action) {
-      case 'addTrack': {
-        const newId = this.value.playList.length;
-        this.set('playList', [...this.value.playList, { ...track, id: newId }]);
-        break;
-      }
-      case 'removeTrack': {
-        const trackidToRemove = track.id;
-        this.set('playList', this.value.playList.filter(t => t.id !== trackidToRemove));
-        break;
-      }
-    }
+  public dispatch(action: Actions): void {
+    const newState = this.reduce(action, this.value);
+    this.subject.next(newState);
   }
 
-  private set(name: string, value: any) {
-    this.subject.next({
-      ...this.subject.value,
-      [name]: value
-    });
+  private reduce(action: Actions, currentState: State): State {
+    switch (action.identifier) {
+      case 'add-track': {
+        const newId = currentState.playList.length;
+        return {
+          ...currentState,
+          playList: [
+            ...currentState.playList,
+            { ...action.payload.track, id: newId }
+          ]
+        };
+      }
+      case 'remove-track': {
+        const trackidToRemove = action.payload.id;
+        return {
+          ...currentState,
+          playList: [
+            ...currentState.playList.filter(t => t.id !== trackidToRemove)
+          ]
+        };
+      }
+      default: {
+        return currentState;
+      }
+    }
   }
 
   public select<T>(name: string): Observable<T> {
