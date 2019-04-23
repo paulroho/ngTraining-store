@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { InitilializeTracksAction } from './store/track.actions';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +11,8 @@ import { Component } from '@angular/core';
     <app-add-track></app-add-track>
   `
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private store: Store) {
+    this.store.dispatch(new InitilializeTracksAction());
+  }
+}

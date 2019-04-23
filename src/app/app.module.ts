@@ -8,11 +8,27 @@ import { AddTrackComponent } from './add-track/add-track.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
 import { TrackListComponent } from './track-list/track-list.component';
 import { TrackClient } from './track-client';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsModule } from '@ngxs/store';
+import { TrackState } from './store/tracks.state';
 
 @NgModule({
-  declarations: [AppComponent, TrackListComponent, ArtistListComponent, AddTrackComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  declarations: [
+    AppComponent,
+    TrackListComponent,
+    ArtistListComponent,
+    AddTrackComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    NgxsModule.forRoot([TrackState]),
+    NgxsLoggerPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot()
+  ],
   providers: [TrackClient],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
