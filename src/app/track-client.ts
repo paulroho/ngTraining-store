@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Track } from './track';
 
 @Injectable({ providedIn: 'root' })
-export class TrackHttpClient {
+export class TrackClient {
   public fetchTracks(): Observable<Track[]> {
     return of(getSampleTracks()).pipe(delay(3000));
   }
