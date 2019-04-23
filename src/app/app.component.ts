@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TrackHttpClient } from './http-client';
 import { Store } from 'src/redux/store';
 import { AddTrackAction } from 'src/redux/actions';
+import { TrackClient } from './track-client';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,10 @@ import { AddTrackAction } from 'src/redux/actions';
   `
 })
 export class AppComponent implements OnInit {
-  constructor(private trackHttpClient: TrackHttpClient, private store: Store) {}
+  constructor(private trackClient: TrackClient, private store: Store) {}
 
   public ngOnInit() {
-    this.trackHttpClient.fetchTracks().subscribe(tracks => {
+    this.trackClient.fetchTracks().subscribe(tracks => {
       tracks.forEach(track =>
         this.store.dispatch(new AddTrackAction({ track }))
       );
