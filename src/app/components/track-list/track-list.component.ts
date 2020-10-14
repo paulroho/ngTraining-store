@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
-import { TrackState, Track } from '../app.module';
-import Store from '../store/store';
+import { Observable, Subject } from 'rxjs';
+import Store from 'src/app/@store/store';
+import { Track, TrackState } from 'src/app/app.module';
 
 @Component({
   selector: 'app-track-list',

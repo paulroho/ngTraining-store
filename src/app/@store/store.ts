@@ -1,19 +1,17 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { filter, map, pluck } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-
-export const INITIALSTATE = new InjectionToken("initialState");
-export const REDUCERS = new InjectionToken("reducers");
-
+export const INITIALSTATE = new InjectionToken('initialState');
+export const REDUCERS = new InjectionToken('reducers');
 
 export interface Action<P> {
-  name: string;
+  type: string;
   payload: P;
 }
 
-export interface Reducer<T, P> {
-  reduce(state: T, action: Action<P>): T;
+export interface Reducer<T, A> {
+  reduce(state: T, action: A): T;
 }
 
 @Injectable()

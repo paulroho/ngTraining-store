@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import AddTrackAction from '../actions/add-track.action';
-import { TrackState } from '../app.module';
-import Store from '../store/store';
+import { Component } from '@angular/core';
+import Store from 'src/app/@store/store';
+import { TrackState } from 'src/app/app.module';
+import { AddTrackAction } from 'src/app/redux/actions/track.action';
 
 @Component({
   selector: 'app-add-track',
@@ -20,11 +20,7 @@ export class AddTrackComponent {
   public artist: string;
   public title: string;
 
-
-
-  constructor(private store: Store<TrackState>) {
-
-  }
+  constructor(private store: Store<TrackState>) {}
 
   public addTrack() {
     this.store.dispatch(
