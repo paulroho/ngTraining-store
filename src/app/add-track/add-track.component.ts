@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import AddTrackAction from '../actions/add-track.action';
+import { TrackState } from '../app.module';
+import Store from '../store/store';
 
 @Component({
   selector: 'app-add-track',
@@ -11,13 +14,21 @@ import { Component, OnInit } from '@angular/core';
       <div></div>
     </div>
   `,
-  styles: []
+  styles: [],
 })
 export class AddTrackComponent {
   public artist: string;
   public title: string;
 
+
+
+  constructor(private store: Store<TrackState>) {
+
+  }
+
   public addTrack() {
-    console.log('track could not be added');
+    this.store.dispatch(
+      new AddTrackAction({ artist: this.artist, title: this.title })
+    );
   }
 }
