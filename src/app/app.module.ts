@@ -8,11 +8,12 @@ import { AddTrackComponent } from './add-track/add-track.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
 import { TrackListComponent } from './track-list/track-list.component';
 import { TrackHttpClient } from './http-client';
+import Store from './store/store';
 
 @NgModule({
   declarations: [AppComponent, TrackListComponent, ArtistListComponent, AddTrackComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [TrackHttpClient],
+  providers: [TrackHttpClient, Store],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
