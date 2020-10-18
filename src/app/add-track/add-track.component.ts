@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import AddTrackAction from '../store/actions/add-track.action';
-import Store from '../store/store';
+import { Component } from '@angular/core';
+import AddTrackAction from '../@store/actions/add-track.action';
+import {Store} from 'src/app/@store/store';
 
 @Component({
   selector: 'app-add-track',

@@ -1,8 +1,9 @@
-import { ɵNullViewportScroller } from '@angular/common';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, pluck } from 'rxjs/operators';
-import TrackReducer from './reducers/track.reducer';
+import { map } from 'rxjs/operators';
+
+export const INITIALSTATE = new InjectionToken("InitialState");
+export const REDUCERS = new InjectionToken("Reducers");
 
 export interface Action<T> {
     name: string;
@@ -24,14 +25,14 @@ export interface Track {
   }  
 
 @Injectable()
-export default class Store {
+export class Store {
     private reducers: Reducer[];
     private state: BehaviorSubject<State>;
 
-    constructor() {
-        const initialState = { tracks: [] };
-        this.reducers = [new TrackReducer()];
+    constructor(@Inject(INITIALSTATE) initialState: { tracks: Track[] },
+                @Inject(REDUCERS) reducers) {
         this.state = new BehaviorSubject(initialState);
+        this.reducers = reducers;
 
         this.state.subscribe(console.log);
     }

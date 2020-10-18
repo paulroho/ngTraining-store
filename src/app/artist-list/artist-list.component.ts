@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import Store from '../store/store';
+import {Store} from 'src/app/@store/store';
 
 @Component({
   selector: 'app-artist-list',

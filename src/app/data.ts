@@ -1,4 +1,4 @@
-import { Track } from './track';
+import { Track } from './store/store';
 
 export const getSampleTracks: () => Track[] = () => [
   {

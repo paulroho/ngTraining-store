@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import Store, { Track } from '../store/store';
+import { Store, Track } from 'src/app/@store/store';
 
 @Component({
   selector: 'app-track-list',

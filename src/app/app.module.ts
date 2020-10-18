@@ -7,13 +7,16 @@ import { AppComponent } from './app.component';
 import { AddTrackComponent } from './add-track/add-track.component';
 import { ArtistListComponent } from './artist-list/artist-list.component';
 import { TrackListComponent } from './track-list/track-list.component';
-import { TrackHttpClient } from './http-client';
-import Store from './store/store';
+import { StoreModule } from './@store/store.module';
+import TrackReducer from './@store/reducers/track.reducer';
+
+const initialState = { tracks: [] };
+const reducers = [new TrackReducer()];
 
 @NgModule({
   declarations: [AppComponent, TrackListComponent, ArtistListComponent, AddTrackComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [TrackHttpClient, Store],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, StoreModule.forRoot(initialState, reducers)],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
