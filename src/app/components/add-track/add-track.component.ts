@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import AddTrackAction from '../@store/actions/add-track.action';
+import AddTrackAction from 'src/app/@store/actions/add-track.action';
 import {Store} from 'src/app/@store/store';
 
 @Component({
