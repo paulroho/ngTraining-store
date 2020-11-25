@@ -23,5 +23,5 @@ export class ArtistListComponent {
     this.artists$ = store.select(store => store.tracks.map(t => t.artist).filter(this.distinctArtists));
   }
 
-  private distinctArtists = (a, i, as) => as.findIndex((a1) => a1.name === a.name) === i;
+  private distinctArtists = (artist, idx, artists) => artists.findIndex((a) => a.name === artist.name) === idx;
 }
