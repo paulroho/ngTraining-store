@@ -1,6 +1,7 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TrackAction } from './actions/track.actions';
 
 export const INITIALSTATE = new InjectionToken("InitialState");
 export const REDUCERS = new InjectionToken("Reducers");
@@ -11,7 +12,7 @@ export interface Action<T> {
 }
 
 export interface Reducer {
-    reduce<T>(state: State, action: Action<T>): State
+    reduce<T>(state: State, action: TrackAction): State
 }
 
 export interface State {
@@ -37,7 +38,7 @@ export class Store {
         this.state.subscribe(console.log);
     }
 
-    public dispatch<T>(action: Action<T>): void {
+    public dispatch<T>(action: TrackAction): void {
         this.reducers.forEach(reducer => {
             const newState = reducer.reduce(this.state.value, action);
             this.state.next(newState);
