@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Artist } from '../artist';
 import AddTrackAction from '../store/actions/add-track.action';
 import Store from '../store/store';
 
@@ -8,7 +9,7 @@ import Store from '../store/store';
     <h2>Add a track to playlist</h2>
     <div style="text-align: center">
       <input [(ngModel)]="title" placeholder="Title" />
-      <input [(ngModel)]="artist" placeholder="Artist" />
+      <input [(ngModel)]="artistName" placeholder="Artist" />
       <button (click)="addTrack()">add</button>
       <div></div>
     </div>
@@ -16,7 +17,7 @@ import Store from '../store/store';
   styles: []
 })
 export class AddTrackComponent {
-  public artist: string;
+  public artistName: string;
   public title: string;
 
   constructor(private store: Store) {}
@@ -24,7 +25,7 @@ export class AddTrackComponent {
   public addTrack() {
     this.store.dispatch(new AddTrackAction({
       title: this.title, 
-      artist: this.artist,
+      artist: {name: this.artistName},
     }));
   }
 }

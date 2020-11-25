@@ -9,7 +9,7 @@ import Store, { Track } from '../store/store';
     <div class="track-list">
       <div class="item" *ngFor="let track of tracks$ | async">
         <b>{{ track.title }}</b>
-        <span>{{ track.artist }}</span>
+        <span>{{ track.artist.name }}</span>
         <button (click)="removeTrack(track)">remove</button>
       </div>
     </div>

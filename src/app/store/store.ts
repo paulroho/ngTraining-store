@@ -2,6 +2,7 @@ import { ɵNullViewportScroller } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
+import { Artist } from '../artist';
 import TrackReducer from './reducers/track.reducer';
 
 export interface Action {
@@ -20,7 +21,7 @@ export interface State {
 export interface Track {
     id: number;
     title: string;
-    artist: string;
+    artist: Artist;
   }  
 
 @Injectable()
