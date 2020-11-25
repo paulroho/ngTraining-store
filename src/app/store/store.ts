@@ -4,13 +4,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
 import TrackReducer from './reducers/track.reducer';
 
-export interface Action<T> {
+export interface Action {
     name: string;
-    payload: T;
+    payload: any;
 }
 
 export interface Reducer {
-    reduce<T>(state: State, action: Action<T>): State
+    reduce<T>(state: State, action: Action): State
 }
 
 export interface State {
@@ -36,7 +36,7 @@ export default class Store {
         this.state.subscribe(console.log);
     }
 
-    public dispatch<T>(action: Action<T>): void {
+    public dispatch<T>(action: Action): void {
         this.reducers.forEach(reducer => {
             const newState = reducer.reduce(this.state.value, action);
             this.state.next(newState);
