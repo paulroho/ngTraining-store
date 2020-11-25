@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
 import { Artist } from '../artist';
-import TrackReducer from './reducers/track.reducer';
+import RemoveTrackAction from './actions/remove-track.action';
+import AddTrackReducer from './reducers/add.track.reducer';
+import RemoveTrackReducer from './reducers/remove.track.reducer';
 
 export interface Action {
     name: string;
@@ -12,6 +14,7 @@ export interface Action {
 
 export interface Reducer {
     reduce<T>(state: State, action: Action): State
+    isApplicable(action: Action): boolean
 }
 
 export interface State {
@@ -31,14 +34,14 @@ export default class Store {
 
     constructor() {
         const initialState = { tracks: [] };
-        this.reducers = [new TrackReducer()];
+        this.reducers = [new AddTrackReducer(), new RemoveTrackReducer()];
         this.state = new BehaviorSubject(initialState);
 
         this.state.subscribe(console.log);
     }
 
     public dispatch<T>(action: Action): void {
-        this.reducers.forEach(reducer => {
+        this.reducers.filter(r => r.isApplicable(action)).forEach(reducer => {
             const newState = reducer.reduce(this.state.value, action);
             this.state.next(newState);
         })

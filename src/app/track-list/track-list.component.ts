@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import RemoveTrackAction from '../store/actions/remove-track.action';
 import Store, { Track } from '../store/store';
 
 @Component({
@@ -24,6 +25,7 @@ export class TrackListComponent {
   }
 
   public removeTrack(track: Track) {
-    console.log('track could not be added');
+    console.log("removing");
+    this.store.dispatch(new RemoveTrackAction({id: track.id}));
   }
 }
